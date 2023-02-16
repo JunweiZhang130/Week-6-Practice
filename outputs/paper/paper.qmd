@@ -14,12 +14,9 @@ bibliography: references.bib
 ---
 
 ```{r}
-#| include: false
-#| warning: false
-#| message: false
-
-library(tidyverse)
-library(palmerpenguins)
+library(knitr)
+library(here)
+include_graphics(here::here"inputs/NASA_APOD_20230216.jpg")
 ```
 
 
