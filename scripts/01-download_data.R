@@ -1,26 +1,25 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Download data from NASA_APOD
+# Author: Rae Zhang
+# Data: 11 February 2023 
+# Contact: junwei.zhang@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: N/A
+# Any other information needed? 
 
 
 #### Workspace setup ####
-library(opendatatoronto)
+library(httr)
 library(tidyverse)
-# [...UPDATE THIS...]
+library(xml2)
+library(jpeg)
 
-#### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
+if (!dir.exists("inputs")) {
+  dir.create("inputs")
+}
 
+NASA_APOD_20230216 <-
+  GET("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2023-02-16")
 
-
-#### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
-
-         
+content(NASA_APOD_20230216)$url |>
+  download.file(destfile = "inputs/NASA_APOD_20230216.jpg") 
